@@ -5,7 +5,6 @@ class Userinfo extends Eloquent {
 
 	protected $table = 'Userinfo';
 
-
 	public function status()
 	{	
 		$status = '';
@@ -53,6 +52,9 @@ class Userinfo extends Eloquent {
     	return $this->translate($date->format('d F Y'));
 	}
 	public function getCorte(){
+		if($this->Duty == 3){
+			return "";
+		}
 		$date = new DateTime($this->FecCorte);
     	return $this->translate($date->format('d F Y'));
 	}
@@ -68,11 +70,16 @@ class Userinfo extends Eloquent {
 	}
 
 	public function getRestante(){
+		if($this->Duty == 3){
+			return "";
+		}
 		$date = new DateTime($this->FecCorte);
 
 		$datetime1 = new DateTime();
+		$datetime1 = new DateTime($datetime1->format('Y-m-d'));
 	    $datetime2 = new DateTime($date->format('Y-m-d'));
-	    $datetime2->add(new DateInterval('P1D'));
+
+	    //$datetime2->add(new DateInterval('P1D'));  
 	    $interval = $datetime1->diff($datetime2);
 
 	    return $interval->format('%R%a');
@@ -80,7 +87,7 @@ class Userinfo extends Eloquent {
 	}
 
 	public function getCaducado(){	
-		if($this->getRestante() <= -60){
+		if($this->getRestante() <= -60 && $this->Duty != 3){
 			DB::table('userinfo')
 	            ->where('Userid', $this->Userid)
 	            ->update(array('UserFlag' => 3));
@@ -89,11 +96,12 @@ class Userinfo extends Eloquent {
 		return false;
 	}
 
-	public function getActivo(){
-		if($this->UserFlag == 2 && $this->getRestante() <= 0 ){
+	public function getActivo(){		
+		if(($this->UserFlag == 2) && ($this->getRestante() <= 0) && ($this->Duty != 3)){
 			$this->cortar();
+			return false;
 		}		
-		return ($this->UserFlag == 2 && !$this->getCaducado());
+		return true;
 	}
 
 	public function cortar(){

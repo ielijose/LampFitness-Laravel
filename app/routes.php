@@ -7,6 +7,7 @@ Route::post('/login', ['uses' => 'AuthController@doLogin', 'before' => 'guest'])
 Route::get('/logout', ['uses' => 'AuthController@doLogout', 'before' => 'auth']);
 
 
+Route::get('/caja', ['uses' => 'HomeController@caja', 'before' => 'admin']);
 
 Route::get('/clientes', function(){
     $clientes = Userinfo::all();
@@ -35,14 +36,20 @@ View::composer('includes.header', function($view)
 });
 
 Route::get('/cliente/{id}', function($id){
+    $planes = Plan::all();
     $cliente = Userinfo::where('Userid', '=', $id)->get()[0];
     $pagos = Pagos::where('Codigo', '=', $id)->get();   
 
    //dd( $cliente->getRestante());
 
-    return View::make('cliente', array('cliente' => $cliente, 'pagos' => $pagos));
+    return View::make('cliente', array('cliente' => $cliente, 'pagos' => $pagos, 'planes' => $planes));
 });
 
 
-Route::get('/planes', ['uses' => 'PlanController@index', 'before' => 'auth']);
+Route::get('/planes', ['uses' => 'PlanController@index', 'before' => 'admin']);
 Route::post('/plan', ['uses' => 'PlanController@post_plan', 'before' => 'auth']);
+
+/* FACTURA */
+
+Route::post('/facturar', ['uses' => 'FacturaController@post_facturar', 'before' => 'admin']);
+Route::get('/factura/{id}', ['uses' => 'FacturaController@get_facturar', 'before' => 'auth']);

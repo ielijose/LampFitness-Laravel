@@ -44,6 +44,9 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('admin', function(){
+	if (Auth::user()->admin == false) return Redirect::to('/')->with('msg', 'Permisos insuficientes.');;
+});
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

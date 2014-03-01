@@ -11,16 +11,18 @@ class UsuarioTableSeeder extends Seeder {
                 'id' => 1,
         		'nombre' => 'Eli José Carrasquero',
         		'username' => 'ielijose',
-        		'password' => Hash::make('1234')
+        		'password' => Hash::make('1234'),
+                'admin' => true
         	)
         );
 
          Usuario::create(
             array(
                 'id' => 2,
-                'nombre' => 'Luis Padron',
-                'username' => 'lp',
-                'password' => Hash::make('1234')
+                'nombre' => 'Usuario',
+                'username' => 'user',
+                'password' => Hash::make('1234'),
+                'admin' => false
             )
         );
 

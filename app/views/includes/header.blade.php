@@ -7,15 +7,16 @@
       <!--profile dropdown start-->
       <ul class="user-info pull-right">
         <li class="hidden-xs">
-          <input type="text" placeholder=" Buscar" class="form-control page-search">
+          <!-- <input type="text" placeholder=" Buscar" class="form-control page-search"> -->
         </li>
         <li class="profile-info dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <img class="img-circle" alt="" src="/images/avatar.jpg">{{ Auth::user()->nombre }}</a>
           <ul class="dropdown-menu">
             <li class="caret"></li>
+            <!--
             <li> <a href="edit-profile.html"> <i class="fa fa-user"></i> Edit Profile </a> </li>
             <li> <a href="mail.html"> <i class="fa fa-inbox"></i> Inbox </a> </li>
-            <li> <a href="fullcalendar.html"> <i class="fa fa-calendar"></i> Calendar </a> </li>
-            <li> <a href="login.html"> <i class="fa fa-clipboard"></i> Log Out </a> </li>
+            <li> <a href="fullcalendar.html"> <i class="fa fa-calendar"></i> Calendar </a> </li> -->
+            <li> <a href="/logout"> <i class="fa fa-clipboard"></i> Salir </a> </li>
           </ul>
         </li>
       </ul>

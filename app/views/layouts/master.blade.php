@@ -45,19 +45,12 @@
 {{ HTML::script('js/smooth-sliding-menu.js') }}
 {{ HTML::script('js/console-numbering.js') }}
 {{ HTML::script('js/to-do-admin.js') }}
-{{ HTML::script('plugins/PCharts/PCharts.js') }}
-{{ HTML::script('plugins/PCharts/serial.js') }}
-{{ HTML::script('plugins/PCharts/amstock.js') }}
-{{ HTML::script('plugins/PCharts/edit-chart.js') }}
-{{ HTML::script('plugins/PCharts/gauge.js') }}
-{{ HTML::script('plugins/PCharts/radar.js') }}
-{{ HTML::script('plugins/PCharts/pie.js') }}
 {{ HTML::script('plugins/kalendar/kalendar.js') }}
 {{ HTML::script('plugins/kalendar/edit-kalendar.js') }}
 {{ HTML::script('js/jquery.sparkline.js') }}
 {{ HTML::script('js/sparkline-chart.js') }}
 {{ HTML::script('js/select-checkbox.js') }}
-{{ HTML::script('http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js') }}
+{{ HTML::script('js/underscore-min.js') }}
 
 @yield('js')
 </body>

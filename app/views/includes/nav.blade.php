@@ -10,12 +10,12 @@
     <ul class="navigation">
       <li><a href="/"><i class="fa fa-home"></i><span>Inicio</span></a></li>
       <li class="sub"> <a href="/clientes"><i class="fa fa-user"></i><span>Clientes</span></a></li>
-       <!-- <li class="sub"><a href="index.html#"><i class="fa fa-list-alt"></i><span>Facturación</span></a></li> -->
-      <li class="sub"><a href="#"><i class="fa fa-money"></i><span>Caja</span></a></li>
-
-      <li class="sub"><a href="#"><i class="fa fa fa-shopping-cart"></i><span>Tienda</span></a></li>
-      
+       <!-- <li class="sub"><a href="index.html#"><i class="fa fa-list-alt"></i><span>Facturación</span></a></li> 
+      <li class="sub"><a href="#"><i class="fa fa fa-shopping-cart"></i><span>Tienda</span></a></li>-->
+      @if(Auth::user()->admin)
+      <li class="sub"><a href="/caja"><i class="fa fa-money"></i><span>Caja</span></a></li>
       <li class="sub"><a href="/planes"><i class="fa fa-cogs"></i><span>Planes</span></a></li>
+      @endif
         <!--<ul class="navigation-sub">
           <li><a href="pcharts.html"><i class="fa fa-bolt"></i><span>PCharts</span></a></li>
           <li><a href="jqplot.html"><i class="fa fa-book"></i><span>jQplot</span></a></li>

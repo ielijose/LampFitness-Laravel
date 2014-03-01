@@ -145,7 +145,17 @@
 										@endif 
 									</td>
 									<td class="center"> {{ $cliente->status() }} </td>
-									<td> {{ $cliente->getCorte() }} ( {{ $cliente->getRestante() }} días ) </td>
+									@if($cliente->getCorte())
+
+										@if($cliente->getRestante() === '+0')
+											<td> {{ $cliente->getCorte() }} ( Hoy ) </td>
+										@else
+											<td> {{ $cliente->getCorte() }} ( {{ $cliente->getRestante() }} días ) </td>
+										@endif
+
+									@else
+									<td></td>
+									@endif
 									<td class="center"> 
 										<a class="btn btn-success " href="/cliente/{{ $cliente->Userid }}"><i class="fa fa-eye"></i> Ver</a>
 										{{-- 
