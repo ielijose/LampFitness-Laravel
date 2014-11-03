@@ -346,13 +346,17 @@
 
 		$(document).on('ready', function(){
 			var def = $('.status-default');
+			var last = 0;
 			$('.title-box').on('click', function(){
 				var id = $(this).data('id');
+				if(last != id){
 
-				$('.status').slideUp('slow', function(){
-					$('.status-' + id).removeClass('hide').slideDown('slow');
-				});
+					$('.status').slideUp('fast', function(){
+						$('.status-' + id).removeClass('hide').slideDown('fast');
+					});
 
+				}
+				last = id;
 			});
 		});
 

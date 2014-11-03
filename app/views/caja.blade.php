@@ -41,7 +41,9 @@
 								</tr>
 							</thead>
 							<tbody class="selects">
+								<?php $total = 0; ?>
 								@foreach($pagos as $pago)
+								<?php $total += $pago->Monto ; ?>
 								<tr>
 									<td>{{ $pago->cliente->Name }}</td>
 									<td>{{ $pago->Descripcion }}</td>
@@ -57,6 +59,16 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+			</div>
+			<!--col-md-6 end--> 
+		</div>
+
+		<div class="row status status-default">
+			<!--col-md-6 start-->
+			<div class="col-md-12">
+				<div class="box-info">
+					<h4 align="right">Total: {{ $total }} </h4>					
 				</div>
 			</div>
 			<!--col-md-6 end--> 

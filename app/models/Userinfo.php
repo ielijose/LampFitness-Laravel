@@ -52,7 +52,7 @@ class Userinfo extends Eloquent {
     	return $this->translate($date->format('d F Y'));
 	}
 	public function getCorte(){
-		if($this->Duty == 3){
+		if($this->Duty == 5){
 			return "";
 		}
 		$date = new DateTime($this->FecCorte);
@@ -70,7 +70,7 @@ class Userinfo extends Eloquent {
 	}
 
 	public function getRestante(){
-		if($this->Duty == 3){
+		if($this->Duty == 5){
 			return "";
 		}
 		$date = new DateTime($this->FecCorte);
@@ -87,7 +87,7 @@ class Userinfo extends Eloquent {
 	}
 
 	public function getCaducado(){	
-		if($this->getRestante() <= -60 && $this->Duty != 3){
+		if($this->getRestante() <= -60 && $this->Duty != 5){
 			DB::table('userinfo')
 	            ->where('Userid', $this->Userid)
 	            ->update(array('UserFlag' => 3));
@@ -97,7 +97,7 @@ class Userinfo extends Eloquent {
 	}
 
 	public function getActivo(){		
-		if(($this->UserFlag == 2) && ($this->getRestante() <= 0) && ($this->Duty != 3)){
+		if(($this->UserFlag == 2) && ($this->getRestante() <= 0) && ($this->Duty != 5)){
 			$this->cortar();
 			return false;
 		}		

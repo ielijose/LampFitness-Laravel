@@ -49,14 +49,22 @@
 								@foreach($clientes as $cliente)
 								<tr class="gradeA">
 									<td> {{ $cliente->Name }} </td>
-									<td> {{ $cliente->getInicio() }} ( {{ $cliente->getAntiguedad() }} días ) </td>
+									<td> {{ $cliente->getInicio() }} ( {{ $cliente->getAntiguedad() }} días ) </td>								
+									
 									<td class="center"> 
 										@if(isset($cliente->plan->id)) 
 											{{ $cliente->plan->plan() }} 
 										@endif 
 									</td>
 									<td class="center"> {{ $cliente->status() }} </td>
-									<td> {{ $cliente->getCorte() }} ( {{ $cliente->getRestante() }} días ) </td>
+
+									@if(isset($cliente->plan->id) && $cliente->plan->id == 5) 
+										<td> No vence </td>
+									@else
+										<td> {{ $cliente->getCorte() }} ( {{ $cliente->getRestante() }} días ) </td>
+									@endif
+
+
 									<td class="center"> 
 										<a class="btn btn-success " href="/cliente/{{ $cliente->Userid }}"><i class="fa fa-eye"></i> Ver</a>
 										{{-- 

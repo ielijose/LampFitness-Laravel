@@ -7,7 +7,7 @@ class HomeController extends BaseController {
 		$estadisticas = array();
 
 	    $estadisticas['activos'] =  Userinfo::where('UserFlag', '=', 2)->orderBy('FecCorte', 'asc')->orderBy('Duty', 'desc')->get();  
-	    $estadisticas['caducados'] =  DB::table('Userinfo')->whereRaw('DATEDIFF(FecCorte, CURDATE()) < -60 AND Duty = 1')->get() ;
+	    $estadisticas['caducados'] =  DB::table('Userinfo')->whereRaw('DATEDIFF(FecCorte, CURDATE()) <= -60 AND Duty = 1')->get() ;
 	    $estadisticas['all'] = Userinfo::all();
 	    $estadisticas['inactivos'] =  Userinfo::where('UserFlag', '=', 3)->orderBy('FecCorte', 'desc')->get();
 	    //$estadisticas['vencer'] =  DB::table('Userinfo')->where(DB::raw('DATEDIFF(FecCorte, CURDATE())'), '<', '7')->get() ;
@@ -37,13 +37,10 @@ class HomeController extends BaseController {
 	private function cortar(){
 		$clientes = Userinfo::all();
 
-		foreach ($clientes as $key => $cliente) {
-			if($cliente->Duty == 3 && $cliente->UserFlag == 3){
-				DB::table('userinfo')->where('Userid', $cliente->Userid)->update(array('UserFlag' => 2));
-			}
+		foreach ($clientes as $key => $cliente) {			
 
 			if($cliente->getRestante() < 0){
-				if($cliente->UserFlag == 2 && $cliente->Duty != 3){
+				if($cliente->UserFlag == 2 && $cliente->Duty != 5){
 					DB::table('userinfo')->where('Userid', $cliente->Userid)->update(array('UserFlag' => 3));
 				}				
 			}else{
@@ -51,6 +48,11 @@ class HomeController extends BaseController {
 					DB::table('userinfo')->where('Userid', $cliente->Userid)->update(array('UserFlag' => 2));
 				}
 			}
+
+			if($cliente->Duty == 5 && $cliente->UserFlag == 3){
+				DB::table('userinfo')->where('Userid', $cliente->Userid)->update(array('UserFlag' => 2));
+			}
+
 		}
 	}
 
